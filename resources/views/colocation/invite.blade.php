@@ -1,0 +1,25 @@
+@include("includes.header")
+<main class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="mb-0">Inviter un membre</h1>
+    <a class="btn btn-outline-secondary" href="/colocation/show"><i class="bi bi-arrow-left me-1"></i>Retour</a>
+  </div>
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <form class="row g-3" novalidate>
+        <div class="col-md-6">
+          <label class="form-label required">Email du destinataire</label>
+          <input type="email" class="form-control" required placeholder="membre@mail.com">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Message (optionnel)</label>
+          <input class="form-control" placeholder="Un petit mot d'accompagnement">
+        </div>
+        <div class="col-12">
+          <button class="btn btn-primary"><i class="bi bi-send me-1"></i>Envoyer l'invitation</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+@include("includes.footer")
