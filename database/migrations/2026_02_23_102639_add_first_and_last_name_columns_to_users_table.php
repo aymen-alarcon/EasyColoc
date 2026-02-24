@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer("reputation")
                     ->after("password")
                     ->default(0);
-            $table->foreignId("roles")
+            $table->foreignId("role_id")
                     ->constrained("roles")
                     ->cascadeOnDelete()
                     ->cascadeOnUpdate();

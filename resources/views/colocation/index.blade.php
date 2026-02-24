@@ -1,41 +1,27 @@
 @include("includes.header")
 <main class="container py-4">
+  <h1 class="mb-3">Ma colocation</h1>
+
   <div class="row g-3">
     <div class="col-lg-8">
       <div class="card shadow-sm">
         <div class="card-body">
-          <div class="d-flex justify-content-between align-items-start">
-            <div>
-              <h1 class="h5 mb-1">Riad Atlas <span class="badge badge-role">Owner</span></h1>
-              <div class="text-muted">Créée le 12/01/2026 · 4 membres</div>
-            </div>
-            <div class="d-flex gap-2">
-              <a class="btn btn-outline-primary" href="/colocation/invite"><i class="bi bi-person-plus me-1"></i>Inviter</a>
-              <a class="btn btn-outline-secondary" href="/colocation/categories"><i class="bi bi-tags me-1"></i>Catégories</a>
-            </div>
-          </div>
-
-          <hr>
-          <h2 class="h6">Membres</h2>
-          <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">Amine <span class="text-success fw-semibold"><i class="bi bi-hand-thumbs-up-fill"></i> +2</span></li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">Aymen <span class="text-success fw-semibold"><i class="bi bi-hand-thumbs-up-fill"></i> +1</span></li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">Sara <span class="text-danger fw-semibold"><i class="bi bi-hand-thumbs-down-fill"></i> -1</span></li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">Youssef <span class="fw-semibold">0</span></li>
-          </ul>
+          <h2 class="h6">Statut de votre colocation</h2>
+          <div class="alert alert-info">Vous avez une colocation active : <strong>Riad Atlas</strong>.</div>
+          <a href="/colocation/show" class="btn btn-outline-primary"><i class="bi bi-eye me-1"></i>Accéder aux détails</a>
+          <button class="btn btn-outline-danger ms-2"><i class="bi bi-box-arrow-right me-1"></i>Quitter (si non-owner)</button>
         </div>
       </div>
     </div>
 
     <div class="col-lg-4">
       <div class="card shadow-sm">
-        <div class="card-header bg-white fw-semibold">Synthèse</div>
         <div class="card-body">
-          <div class="d-flex justify-content-between"><span>Total payé</span><strong>2 100,00 DH</strong></div>
-          <div class="d-flex justify-content-between"><span>Part par membre</span><strong>525,00 DH</strong></div>
-          <hr>
-          <a class="btn btn-outline-primary w-100 mb-2" href="/colocation/expenses"><i class="bi bi-receipt me-1"></i>Gérer les dépenses</a>
-          <a class="btn btn-outline-success w-100" href="/colocation/settlements"><i class="bi bi-cash-coin me-1"></i>Qui doit à qui</a>
+          <h2 class="h6">Créer ou rejoindre</h2>
+          <p class="text-muted small">Règle : une seule colocation active par utilisateur.</p>
+          <a class="btn btn-secondary w-100" href="/colocation/create"><i class="bi bi-house-add me-1"></i>Créer</a>
+          <a class="btn btn-secondary w-100 mt-2"><i class="bi bi-box-arrow-in-right me-1"></i>Rejoindre via invitation</a>
+          <div class="form-text">Désactive/active côté serveur selon membership actif.</div>
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@
 <main class="container py-4">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="mb-0">Ajouter une dépense (Admin)</h1>
-    <a class="btn btn-outline-secondary" href="/admin/expenses.html"><i class="bi bi-arrow-left me-1"></i>Retour</a>
+    <a class="btn btn-outline-secondary" href="{{ url()->previous() }}"><i class="bi bi-arrow-left me-1"></i>Retour</a>
   </div>
 
   <div class="card shadow-sm">

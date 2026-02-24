@@ -1,38 +1,20 @@
 @include("includes.header")
   <div class="container py-4">
-
-    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
-      <h1 class="mb-2">Catégories</h1>
-      <div class="text-muted small">
-        Gérez les catégories de dépenses de votre colocation.
-      </div>
-    </div>
-
+    <h1 class="mb-5">Catégories</h1>
     <div class="row g-4">
-      <!-- ADD CATEGORY -->
       <div class="col-lg-5">
         <div class="card shadow-sm">
           <div class="card-body">
             <h2 class="h6 mb-3">Ajouter une catégorie</h2>
-
-            <form id="form-add-category" class="row g-3" novalidate>
-              <div class="col-12">
-                <label class="form-label fw-semibold required">Nom de la catégorie</label>
-                <input type="text" class="form-control" id="category-name" placeholder="Ex : Alimentation" required minlength="2" maxlength="40" />
-                <div class="invalid-feedback">Veuillez saisir un nom (2 à 40 caractères).</div>
-              </div>
-
-              <div class="col-12">
-                <button class="btn btn-primary w-100">
-                  <i class="bi bi-plus-circle me-1"></i>
-                 items-center mb-3">
-              <h2 class="h6 mb-0">Catégories existantes</h2>
-              <div class="input-group input-group-sm" style="max-width: 260px;">
-                <span class="input-group-text bg-light"><i class="bi bi-search"></i></span>
-                <input type="text" id="search-category" class="form-control" placeholder="Rechercher..." />
-              </div>
-            </div>
-
+            <form id="form-add-category" class="row g-3 my-4" action="" method="POST">
+              @csrf
+              @method("POST")
+              
+              <label class="form-label fw-semibold required">Nom de la catégorie</label>
+              <input type="text" class="form-control" id="category-name" placeholder="Ex : Alimentation" required minlength="2" maxlength="40" />
+              <div class="invalid-feedback">Veuillez saisir un nom (2 à 40 caractères).</div>
+              <button type="submit" class="btn btn-primary w-100"><i class="bi bi-plus-circle me-1"></i></button>
+            </form>
             <div class="table-responsive">
               <table class="table align-middle table-hover mb-0" id="table-categories">
                 <thead class="table-light">
@@ -43,7 +25,6 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <!-- Sample rows (replace with server-rendered list) -->
                   <tr>
                     <td>
                       <span class="cat-name">Alimentation</span>
@@ -60,46 +41,13 @@
                       </button>
                     </td>
                   </tr>
-
-                  <tr>
-                    <td><span class="cat-name">Charges</span></td>
-                    <td><span class="badge bg-warning-subtle text-warning border border-warning-subtle">8</span></td>
-                    <td class="text-end">
-                      <button class="btn btn-sm btn-outline-secondary me-1 btn-rename" data-name="Charges">
-                        <i class="bi bi-pencil"></i>
-                      </button>
-                      <button class="btn btn-sm btn-outline-danger btn-delete" data-name="Charges" data-usage="8">
-                        <i class="bi bi-trash"></i>
-                      </button>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td><span class="cat-name">Abonnement</span></td>
-                    <td><span class="badge bg-info-subtle text-info border border-info-subtle">5</span></td>
-                    <td class="text-end">
-                      <button class="btn btn-sm btn-outline-secondary me-1 btn-rename" data-name="Abonnement">
-                        <i class="bi bi-pencil"></i>
-                      </button>
-                      <button class="btn btn-sm btn-outline-danger btn-delete" data-name="Abonnement" data-usage="5">
-                        <i class="bi bi-trash"></i>
-                      </button>
-                    </td>
-                  </tr>
-
                 </tbody>
               </table>
-            </div>
-
-            <!-- SMALL HINT -->
-            <div class="text-muted small mt-3">
-              * Lors de la suppression, les dépenses associées devront être **reliées à une autre catégorie** ou refusées côté serveur.
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 
   <div class="modal fade" id="modalRename" tabindex="-1" aria-labelledby="modalRenameLabel" aria-hidden="true">

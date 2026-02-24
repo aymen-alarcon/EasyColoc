@@ -1,23 +1,9 @@
 @include("includes.header")
   <div class="container py-4">
-    <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
-      <h1 class="mb-2">Qui doit à qui</h1>
-
-      <div class="d-flex gap-2">
-        <div class="input-group input-group-sm" style="max-width: 260px;">
-          <span class="input-group-text bg-light"><i class="bi bi-search"></i></span>
-          <input type="text" id="search" class="form-control" placeholder="Rechercher (nom ou montant)..." />
-        </div>
-        <select id="filter-member" class="form-select form-select-sm" style="max-width: 220px;">
-          <option value="">Tous les membres</option>
-          <option value="Aymen">Aymen</option>
-          <option value="Amine">Amine</option>
-          <option value="Sara">Sara</option>
-          <option value="Youssef">Youssef</option>
-        </select>
-      </div>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="mb-5">Qui doit à qui</h1>
+      <a class="btn btn-outline-secondary" href="{{ url()->previous() }}"><i class="bi bi-arrow-left me-1"></i>Retour</a>
     </div>
-
     <div class="row g-3 mb-4">
       <div class="col-md-4">
         <div class="card shadow-sm">
@@ -27,7 +13,6 @@
           </div>
         </div>
       </div>
-
       <div class="col-md-4">
         <div class="card shadow-sm">
           <div class="card-body">
@@ -36,7 +21,6 @@
           </div>
         </div>
       </div>
-
       <div class="col-md-4">
         <div class="card shadow-sm">
           <div class="card-body">
@@ -46,7 +30,6 @@
         </div>
       </div>
     </div>
-
     <div class="card shadow-sm">
       <div class="card-body p-0">
         <div class="table-responsive">
@@ -57,33 +40,11 @@
                 <th>Créancier</th>
                 <th>Montant</th>
                 <th>Restant</th>
-                <th>Date maj</th>
+                <th>Date</th>
                 <th class="text-end">Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr data-id="1" data-debtor="Aymen" data-creditor="Amine" data-amount="150.00" data-remaining="150.00">
-                <td>
-                  <i class="bi bi-person me-1"></i> Aymen
-                </td>
-                <td>
-                  <i class="bi bi-person-check me-1"></i> Amine
-                </td>
-                <td>150,00 DH</td>
-                <td><span class="fw-semibold text-danger remaining">150,00 DH</span></td>
-                <td><span class="text-muted">2026‑02‑18</span></td>
-                <td class="text-end">
-                  <div class="btn-group">
-                    <button class="btn btn-sm btn-outline-success btn-pay" data-id="1">
-                      <i class="bi bi-cash-coin me-1"></i> Payer
-                    </button>
-                    <button class="btn btn-sm btn-outline-secondary btn-history" data-id="1">
-                      <i class="bi bi-clock-history me-1"></i> Historique
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
               <tr data-id="2" data-debtor="Sara" data-creditor="Youssef" data-amount="80.00" data-remaining="80.00">
                 <td><i class="bi bi-person me-1"></i> Sara</td>
                 <td><i class="bi bi-person-check me-1"></i> Youssef</td>
@@ -92,34 +53,12 @@
                 <td><span class="text-muted">2026‑02‑15</span></td>
                 <td class="text-end">
                   <div class="btn-group">
-                    <button class="btn btn-sm btn-outline-success btn-pay" data-id="2">
-                      <i class="bi bi-cash-coin me-1"></i> Payer
-                    </button>
                     <button class="btn btn-sm btn-outline-secondary btn-history" data-id="2">
                       <i class="bi bi-clock-history me-1"></i> Historique
                     </button>
                   </div>
                 </td>
               </tr>
-
-              <tr data-id="3" data-debtor="Aymen" data-creditor="Youssef" data-amount="120.00" data-remaining="50.00">
-                <td><i class="bi bi-person me-1"></i> Aymen</td>
-                <td><i class="bi bi-person-check me-1"></i> Youssef</td>
-                <td>120,00 DH</td>
-                <td><span class="fw-semibold text-danger remaining">50,00 DH</span></td>
-                <td><span class="text-muted">2026‑02‑12</span></td>
-                <td class="text-end">
-                  <div class="btn-group">
-                    <button class="btn btn-sm btn-outline-success btn-pay" data-id="3">
-                      <i class="bi bi-cash-coin me-1"></i> Payer
-                    </button>
-                    <button class="btn btn-sm btn-outline-secondary btn-history" data-id="3">
-                      <i class="bi bi-clock-history me-1"></i> Historique
-                    </button>
-                  </div>
-                </td>
-              </tr>
-
             </tbody>
           </table>
         </div>
