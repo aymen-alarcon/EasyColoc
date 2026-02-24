@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\colocation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class ColocationController extends Controller
 {
@@ -12,7 +13,11 @@ class ColocationController extends Controller
      */
     public function index()
     {
-        //
+        $query = colocation::query();
+        $colocation = $query->where("owner_id", FacadesAuth::user()->id);
+        dd($colocation);
+
+        return view("colocation.index", compact("colocation"));
     }
 
     /**
