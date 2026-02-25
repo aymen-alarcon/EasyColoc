@@ -2,18 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\category;
+use App\Models\credit;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class CreditController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = Category::all();
-        return view("colocation.categories", compact("categories"));
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -21,20 +28,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = [
-            "name" => $request->name,
-            "description" => $request->description,
-        ];
-
-        Category::create($validate);
-
-        return redirect()->route("colocation.categories");
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(category $category)
+    public function show(credit $credit)
     {
         //
     }
@@ -42,7 +42,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(category $category)
+    public function edit(credit $credit)
     {
         //
     }
@@ -50,7 +50,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, category $category)
+    public function update(Request $request, credit $credit)
     {
         //
     }
@@ -58,7 +58,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(category $category)
+    public function destroy(credit $credit)
     {
         //
     }

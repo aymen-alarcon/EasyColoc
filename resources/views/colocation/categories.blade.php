@@ -6,13 +6,17 @@
         <div class="card shadow-sm">
           <div class="card-body">
             <h2 class="h6 mb-3">Ajouter une catégorie</h2>
-            <form id="form-add-category" class="row g-3 my-4" action="" method="POST">
+            <form id="form-add-category" class="row g-3 my-4" action="/colocation/categories/store" method="POST">
               @csrf
               @method("POST")
-              
-              <label class="form-label fw-semibold required">Nom de la catégorie</label>
-              <input type="text" class="form-control" id="category-name" placeholder="Ex : Alimentation" required minlength="2" maxlength="40" />
-              <div class="invalid-feedback">Veuillez saisir un nom (2 à 40 caractères).</div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold required">Nom de la catégorie</label>
+                <input type="text" class="form-control" id="category-name" name="name" placeholder="Ex : Alimentation" required/>           
+              </div>              
+              <div class="col-md-6">
+                <label class="form-label fw-semibold required">description de la catégorie</label>
+                <input type="text" class="form-control" id="category-name" name="description" required/>           
+              </div>              
               <button type="submit" class="btn btn-primary w-100"><i class="bi bi-plus-circle me-1"></i></button>
             </form>
             <div class="table-responsive">
@@ -20,27 +24,29 @@
                 <thead class="table-light">
                   <tr>
                     <th style="min-width: 220px;">Nom</th>
-                    <th>Utilisations</th>
+                    <th>Description</th>
                     <th class="text-end" style="min-width: 160px;">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                      <span class="cat-name">Alimentation</span>
-                    </td>
-                    <td>
-                      <span class="badge bg-success-subtle text-success border border-success-subtle">12</span>
-                    </td>
-                    <td class="text-end">
-                      <button class="btn btn-sm btn-outline-secondary me-1 btn-rename" data-name="Alimentation">
-                        <i class="bi bi-pencil"></i>
-                      </button>
-                      <button class="btn btn-sm btn-outline-danger btn-delete" data-name="Alimentation" data-usage="12">
-                        <i class="bi bi-trash"></i>
-                      </button>
-                    </td>
-                  </tr>
+                  @foreach ($categories as $category)                    
+                    <tr>
+                      <td>
+                        <span class="cat-name">{{ $category->name }}</span>
+                      </td>
+                      <td>
+                        <span class="cat-name">{{ $category->description }}</span>
+                      </td>
+                      <td class="text-end">
+                        <button class="btn btn-sm btn-outline-secondary me-1 btn-rename" data-name="Alimentation">
+                          <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger btn-delete" data-name="Alimentation" data-usage="12">
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -60,7 +66,7 @@
         <div class="modal-body">
           <div class="mb-3">
             <label class="form-label required">Nouveau nom</label>
-            <input type="text" class="form-control" id="rename-input" required minlength="2" maxlength="40"/>
+            <input type="text" class="form-control" id="rename-input" required>
             <div class="invalid-feedback">Veuillez saisir un nom valide.</div>
           </div>
           <input type="hidden" id="rename-original"/>

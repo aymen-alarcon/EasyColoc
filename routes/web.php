@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdhesionController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColocationController;
+use App\Http\Controllers\DepenseController;
 use App\Http\Controllers\ProfileController;
+use App\Models\adhesion;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -32,25 +36,17 @@ Route::get('/register', function () {
 })->name('register');
 
     Route::prefix('colocation')->middleware("auth")->group(function () {
-        Route::get('/create', function () {
-            return view('colocation.create');
-        })->name('colocation.create');
+        Route::post('/create', [ColocationController::class, "store"])->name('colocation.create');
 
-        Route::get('/show', function () {
-            return view('colocation.list');
-        })->name('colocation.show');
+        Route::get('/show/{colocation}',[AdhesionController::class, "index"])->name('colocation.show');
 
-        Route::get('/categories', function () {
-            return view('colocation.categories');
-        })->name('colocation.categories');
+        Route::get('/categories', [CategoryController::class, "index"])->name('colocation.categories');
+        Route::post('/categories/store', [CategoryController::class, "store"]);
 
-        Route::get('/expenses', function () {
-            return view('colocation.expenses');
-        })->name('colocation.expenses');
+        Route::get('/expenses/{colocation}', [DepenseController::class, "index"])->name('colocation.expenses');
 
-        Route::get('/expense/create', function () {
-            return view('colocation.expense-create');
-        })->name('colocation.expense-create');
+        Route::get('/expense/create', [DepenseController::class, "create"])->name('colocation.expense-create');
+        Route::post('/expense/create/store', [DepenseController::class, "store"]);
 
         Route::get('/manage-members', function () {
             return view('colocation.manage-members');

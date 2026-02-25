@@ -10,9 +10,11 @@ class AdhesionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($colocation)
     {
-        //
+        $query = adhesion::query();
+        $members = $query->where('left_at', NULL)->where('colocation_id', $colocation)->get();
+        return view('colocation.list', compact("members"));
     }
 
     /**

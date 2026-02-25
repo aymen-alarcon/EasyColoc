@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\adhesion;
 use App\Models\depense;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\category;
 
 class DepenseController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($colocation)
     {
-        //
+        $query = Depense::query();
+        $depenses = $query->where("colocation_id", $colocation)->get();
+        return view("colocation.expenses", compact("depenses"));
     }
 
     /**
@@ -20,7 +25,10 @@ class DepenseController extends Controller
      */
     public function create()
     {
-        //
+        $query = adhesion::query();
+        $adhesions = $query->where("colocation_id", Auth::user()->ownColocation->id)->get();
+        $categories = Category::all();
+        return view("colocation.expense-create", compact("adhesions", "categories"));
     }
 
     /**
@@ -28,7 +36,17 @@ class DepenseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = [
+            "colocation_id" => $request->colocation,
+            "buyer" => $request->payer,
+            "category_id" => $request->category,
+            "title" => $request->title,
+            "price" => $request->price,
+        ];
+
+        Depense::create($validate);
+
+        return redirect()->route("colocation.expenses", $request->colocation);
     }
 
     /**

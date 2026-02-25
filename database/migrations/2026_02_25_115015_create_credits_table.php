@@ -11,22 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('depenses', function (Blueprint $table) {
+        Schema::create('credits', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
-            $table->string("price");
-            $table->foreignId("category_id")
-                    ->constrained("categories")
+            $table->string("status");
+            $table->foreignId("depense_id")
+                    ->constrained("depenses")
                     ->cascadeOnDelete()
                     ->cascadeOnUpdate();
-            $table->foreignId("buyer")
+            $table->foreignId("user_id")
                     ->constrained("users")
                     ->cascadeOnDelete()
                     ->cascadeOnUpdate();
-            $table->foreignId("colocation_id")
-                    ->constrained("colocations")
-                    ->cascadeOnDelete()
-                    ->cascadeOnUpdate();
+            $table->float("price");
             $table->timestamps();
         });
     }
@@ -36,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('depenses');
+        Schema::dropIfExists('credits');
     }
 };

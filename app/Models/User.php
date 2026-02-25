@@ -5,6 +5,9 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Cashier\Billable;
@@ -32,6 +35,25 @@ class User extends Authenticatable
         return $this->BelongsTo(colocation::class);
     }
 
+    public function ownColocation():HasOne{
+        return $this->hasOne(colocation::class, "owner_id");
+    }
+
+    public function adhesions():BelongsToMany{
+        return $this->belongsToMany(adhesion::class);
+    }
+
+    public function payed():HasMany{
+        return $this->hasMany(depense::class, "buyer");
+    }
+
+    public function role():BelongsTo{
+        return $this->belongsTo(Role::class);
+    }
+
+    public function credit():HasMany{
+        return $this->hasMany(credit::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

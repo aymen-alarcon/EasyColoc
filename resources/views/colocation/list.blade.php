@@ -17,7 +17,13 @@
           <hr>
           <h2 class="h6">Membres</h2>
           <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">Amine <span class="text-success fw-semibold"><i class="bi bi-hand-thumbs-up-fill"></i> +2</span></li>
+            @if (count($members) > 0)
+            @foreach ($members as $member)              
+              <li class="list-group-item d-flex justify-content-between align-items-center">{{ $member->user->first_name }} {{ $member->user->last_name }}<span class="text-success fw-semibold"><i class="bi bi-hand-thumbs-up-fill"></i>{{ $member->user->reputation }}</span></li>
+            @endforeach
+            @else
+              <li class="list-group-item d-flex justify-content-between align-items-center">there are no members yet</li>
+            @endif
           </ul>
         </div>
       </div>
@@ -30,7 +36,7 @@
           <div class="d-flex justify-content-between"><span>Part par membre</span><strong>525,00 DH</strong></div>
           <hr>
           <a class="btn btn-outline-primary w-100 mb-2" href="/colocation/manage-members"><i class="bi bi-person-circle"></i> Manager les membres</a>
-          <a class="btn btn-outline-primary w-100 mb-2" href="/colocation/expenses"><i class="bi bi-receipt me-1"></i>Gérer les dépenses</a>
+          <a class="btn btn-outline-primary w-100 mb-2" href="/colocation/expenses/{{ $member->colocation->id }}"><i class="bi bi-receipt me-1"></i>Gérer les dépenses</a>
           <a class="btn btn-outline-success w-100" href="/colocation/settlements"><i class="bi bi-cash-coin me-1"></i>Qui doit à qui</a>
         </div>
       </div>

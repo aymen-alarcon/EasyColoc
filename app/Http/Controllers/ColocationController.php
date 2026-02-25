@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\adhesion;
 use App\Models\colocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Illuminate\Support\Facades\Auth;
 
 class ColocationController extends Controller
 {
@@ -13,19 +15,12 @@ class ColocationController extends Controller
      */
     public function index()
     {
-        $query = colocation::query();
-        $colocation = $query->where("owner_id", FacadesAuth::user()->id);
-        dd($colocation);
+        $colocationQuery = colocation::query();
+        $colocation = $colocationQuery->where("owner_id", FacadesAuth::user()->id)->first();
+        $adhesionQuery = adhesion::query();
+        $adhesion = $adhesionQuery->where("colocation_id", $colocation->id)->get();
 
         return view("colocation.index", compact("colocation"));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -33,7 +28,17 @@ class ColocationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            "name" => "required",
+            "description" => "required",
+        ]);
+
+        $validate["owner_id"] = Auth::user()->id;
+        $validate["status"] = "pending";
+
+        Colocation::create($validate);
+
+        return redirect()->route("dashboard");
     }
 
     /**
