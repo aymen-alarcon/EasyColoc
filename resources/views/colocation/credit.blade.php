@@ -4,67 +4,40 @@
       <h1 class="mb-5">Qui doit à qui</h1>
       <a class="btn btn-outline-secondary" href="{{ url()->previous() }}"><i class="bi bi-arrow-left me-1"></i>Retour</a>
     </div>
-    <div class="row g-3 mb-4">
-      <div class="col-md-4">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <div class="text-muted">Dettes totales</div>
-            <div class="h4 fw-bold mb-0" id="sum-total">280,00 DH</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <div class="text-muted">Payé ce mois-ci</div>
-            <div class="h4 fw-bold mb-0" id="sum-paid">0,00 DH</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <div class="text-muted">Reste à payer</div>
-            <div class="h4 fw-bold mb-0 text-danger" id="sum-remaining">280,00 DH</div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="card shadow-sm">
       <div class="card-body p-0">
         <div class="table-responsive">
-          <table class="table align-middle mb-0 table-hover" id="table-settlements">
+          <table class="table align-middle mb-0 table-hover" id="table-pay">
             <thead class="table-light">
               <tr>
-                <th>Débiteur</th>
-                <th>Créancier</th>
+                <th>User</th>
                 <th>Montant</th>
-                <th>Restant</th>
+                <th>status</th>
                 <th>Date</th>
                 <th class="text-end">Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr data-id="2" data-debtor="Sara" data-creditor="Youssef" data-amount="80.00" data-remaining="80.00">
-                <td><i class="bi bi-person me-1"></i> Sara</td>
-                <td><i class="bi bi-person-check me-1"></i> Youssef</td>
-                <td>80,00 DH</td>
-                <td><span class="fw-semibold text-danger remaining">80,00 DH</span></td>
-                <td><span class="text-muted">2026‑02‑15</span></td>
-                <td class="text-end">
-                  <div class="btn-group">
-                    <button class="btn btn-sm btn-outline-secondary btn-history" data-id="2">
-                      <i class="bi bi-clock-history me-1"></i> Historique
-                    </button>
-                  </div>
-                </td>
-              </tr>
+              @foreach ($credits as $credit)                
+                <tr>
+                  <td><i class="bi bi-person me-1"></i>{{ $credit->user->first_name }} {{ $credit->user->last_name }}</td>
+                  <td>{{ $credit->price }}</td>
+                  <td><span class="fw-semibold">{{ $credit->status }}</span></td>
+                  <td><span class="text-muted">{{ $credit->created_at->format("Y-m-d") }}</span></td>
+                  <td class="text-end">
+                    <div class="btn-group">
+                      <button class="btn btn-sm btn-outline-secondary btn-history" data-id="2">
+                        <i class="bi bi-clock-history me-1"></i> Historique
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              @endforeach
             </tbody>
           </table>
         </div>
       </div>
     </div>
-
   </div>
 
   <div class="modal fade" id="modalPay" tabindex="-1" aria-hidden="true">
@@ -75,7 +48,6 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
         </div>
         <div class="modal-body">
-
           <div class="row g-3">
             <div class="col-md-6">
               <label class="form-label required">Montant (DH)</label>

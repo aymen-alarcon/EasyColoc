@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdhesionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColocationController;
+use App\Http\Controllers\CreditController;
 use App\Http\Controllers\DepenseController;
 use App\Http\Controllers\ProfileController;
 use App\Models\adhesion;
@@ -48,13 +49,15 @@ Route::get('/register', function () {
         Route::get('/expense/create', [DepenseController::class, "create"])->name('colocation.expense-create');
         Route::post('/expense/create/store', [DepenseController::class, "store"]);
 
-        Route::get('/manage-members', function () {
-            return view('colocation.manage-members');
+        Route::get("/credit/store/{depense}", [CreditController::class, "store"])->name("credit.store");
+
+        Route::get('/manage-members/{colocation}', function ($colocation) {
+            $query = adhesion::query();
+            $members = $query->where('left_at', NULL)->where('colocation_id', $colocation)->get();
+            return view('colocation.manage-members', compact("members"));
         })->name('colocation.manage-members');
 
-        Route::get('/settlements', function () {
-            return view('colocation.settlements');
-        })->name('colocation.settlements');
+        Route::get('/credit/{depense}', [CreditController::class, "index"])->name('colocation.credit');
 
         Route::get('/invite', function () {
             return view('colocation.invite');

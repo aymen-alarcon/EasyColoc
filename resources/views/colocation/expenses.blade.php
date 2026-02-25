@@ -30,6 +30,7 @@
                                 <td>{{ $depense->price }} DH</td>
                                 <td>{{ $depense->created_at->format("Y-m-d") }}</td>
                                 <td class="text-end">
+                                    <a class="btn btn-outline-success" href="/colocation/credit/{{ $depense->id }}"><i class="bi bi-cash-coin me-1"></i>Qui doit à qui</a>
                                     <button class="btn btn-sm btn-outline-secondary me-1">
                                         <i class="bi bi-pencil"></i>
                                     </button>

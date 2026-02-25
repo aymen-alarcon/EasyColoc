@@ -4,31 +4,45 @@ namespace App\Http\Controllers;
 
 use App\Models\credit;
 use Illuminate\Http\Request;
+use App\Models\depense;
+use App\Models\colocation;
 
 class CreditController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($depense)
     {
-        //
-    }
+        $query = Credit::query();
+        $credits = $query->where("depense_id", $depense)->get();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return view("colocation.credit", compact("credits"));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store($depense)
     {
-        //
+        $depenses = Depense::findOrFail($depense);
+
+        $members = count($depenses->colocation->adhesion);
+        $price = $depenses->price;
+        foreach ($depenses->colocation->adhesion as $adhesion) {
+            $validate["price"] = $price / $members;
+            if ($adhesion->user->id === $depenses->user->id) {
+                $validate["status"] = "paid";
+            }else{
+                $validate["status"] = "not paid";
+            }
+            $validate["user_id"] = $adhesion->user->id;
+            $validate["depense_id"] = $depenses->id;
+
+            credit::create($validate);
+        }
+
+        return redirect()->route("colocation.expenses", $adhesion->colocation->id);
     }
 
     /**

@@ -14,28 +14,26 @@
                                 <th>Nom</th>
                                 <th>Rôle</th>
                                 <th>Réputation</th>
-                                <th>Solde</th>
                                 <th class="text-end">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Amine</td>
-                                <td><span class="badge bg-primary">Owner</span></td>
-                                <td>
-                                    <span class="text-success fw-semibold">
-                                        <i class="bi bi-hand-thumbs-up-fill"></i> +2
-                                    </span>
-                                </td>
-                                <td class="text-success fw-semibold">+110,00 DH</td>
+                            @foreach ($members as $member)                                
+                                <tr>
+                                    <td>{{ $member->user->first_name }} {{ $member->user->last_name }}</td>
+                                    <td><span class="badge bg-primary">{{ $member->role }}</span></td>
+                                    <td>
+                                        {{ $member->user->reputation }}
+                                    </td>
 
-                                <td class="text-end">
-                                    <button class="btn btn-sm btn-outline-secondary" disabled
-                                        title="Impossible de retirer l'owner">
-                                        <i class="bi bi-lock"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                                    <td class="text-end">
+                                        <button class="btn btn-sm btn-outline-secondary" disabled
+                                            title="Impossible de retirer l'owner">
+                                            <i class="bi bi-lock"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

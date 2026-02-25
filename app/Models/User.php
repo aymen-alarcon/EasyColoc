@@ -5,7 +5,6 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -39,8 +38,8 @@ class User extends Authenticatable
         return $this->hasOne(colocation::class, "owner_id");
     }
 
-    public function adhesions():BelongsToMany{
-        return $this->belongsToMany(adhesion::class);
+    public function adhesions():HasMany{
+        return $this->HasMany(adhesion::class);
     }
 
     public function payed():HasMany{
@@ -52,7 +51,7 @@ class User extends Authenticatable
     }
 
     public function credit():HasMany{
-        return $this->hasMany(credit::class);
+        return $this->hasMany(credit::class, "user_id");
     }
 
     /**

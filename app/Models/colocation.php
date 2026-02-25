@@ -22,4 +22,8 @@ class colocation extends Model
     {
         return $this->belongsTo(User::class, 'owner_id');
     }
+
+    public function depense():HasMany{
+        return $this->hasMany(depense::class, "colocation_id");
+    }
 }

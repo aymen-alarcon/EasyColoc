@@ -44,9 +44,9 @@ class DepenseController extends Controller
             "price" => $request->price,
         ];
 
-        Depense::create($validate);
+        $depense = Depense::create($validate);
 
-        return redirect()->route("colocation.expenses", $request->colocation);
+        return redirect()->route("credit.store", $depense);
     }
 
     /**

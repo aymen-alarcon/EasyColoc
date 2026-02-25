@@ -14,10 +14,13 @@ class depense extends Model
         return $this->BelongsTo(category::class);
     }
 
+    public function user():BelongsTo{
+        return $this->belongsTo(User::class, "buyer");
+    }
     
-    public function colocation(): BelongsTo
+    public function colocation():BelongsTo
     {
-        return $this->belongsTo(colocation::class);
+        return $this->belongsTo(colocation::class, "colocation_id");
     }
 
     public function payer():BelongsTo{
