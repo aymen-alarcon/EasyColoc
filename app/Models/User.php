@@ -39,7 +39,7 @@ class User extends Authenticatable
     }
 
     public function adhesions():HasMany{
-        return $this->HasMany(adhesion::class);
+        return $this->HasMany(adhesion::class, "user_id");
     }
 
     public function payed():HasMany{

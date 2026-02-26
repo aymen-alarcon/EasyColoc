@@ -15,7 +15,7 @@ class colocation extends Model
     }
 
     public function adhesion():HasMany{
-        return $this->hasMany(adhesion::class);
+        return $this->hasMany(adhesion::class, "colocation_id");
     }
 
     public function owner(): BelongsTo

@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Models\adhesion;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -28,7 +29,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('colocation.show');
+        $adhesionQuery = adhesion::query();
+        $adhesion = $adhesionQuery->where("user_id", Auth::user()->id)->get();
+
+        return redirect()->route('colocation.show', $adhesion);
     }
 
     /**

@@ -10,11 +10,11 @@ class adhesion extends Model
     protected $fillable = ["user_id", "colocation_id", "left_at"];
 
     public function colocation():BelongsTo{
-        return $this->belongsTo(colocation::class);
+        return $this->belongsTo(colocation::class, "colocation_id");
     }
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, "user_id");
     }
 }

@@ -4,15 +4,15 @@
     <div class="col-md-7">
       <div class="card shadow-sm">
         <div class="card-body p-4">
-          <h1 class="h5 mb-2">Invitation à rejoindre <strong>Riad Atlas</strong></h1>
-          <p>Vous avez été invité avec l'email <strong>yara@example.com</strong>.</p>
-
-          <div class="d-flex gap-2">
-            <button class="btn btn-success"><i class="bi bi-check2 me-1"></i>Accepter</button>
-            <button class="btn btn-outline-danger"><i class="bi bi-x me-1"></i>Refuser</button>
-          </div>
-
-          <p class="form-text mt-3">Le serveur doit vérifier : email correspondant & aucune colocation active.</p>
+      <form class="row g-3" action="/invite/join" method="POST">
+        @csrf
+        @method("PUT")
+        <div class="col-md-12">
+          <label class="form-label required">Token</label>
+          <input type="text" name="token" class="form-control" required placeholder="membre@mail.com">
+        </div>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-send me-1"></i>Accepter l'invitation</button>
+      </form>
         </div>
       </div>
     </div>

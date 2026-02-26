@@ -8,17 +8,15 @@ class ContactMail extends Mailable
 {
     public $messageContent;
     public $email;
-    public $token;
 
-    public function __construct($email, $messageContent, $token)
+    public function __construct($email, $messageContent)
     {
         $this->messageContent = $messageContent;
         $this->email = $email;
-        $this->token = $token;
     }
 
     public function build()
     {
-        return $this->subject("message")->view("emails.index", ["messageContact" => $this->messageContent, "email" => $this->email, "token" > $this->token]);
+        return $this->subject("message")->view("emails.index", ["messageContact" => $this->messageContent, "email" => $this->email]);
     }
 }

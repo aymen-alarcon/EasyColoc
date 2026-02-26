@@ -41,7 +41,7 @@ Route::get('/register', function () {
 })->name('register');
 
     Route::prefix('colocation')->middleware("auth")->group(function () {
-        Route::get('/show/{colocation}',[AdhesionController::class, "index"])->name('colocation.show');
+        Route::get('/show/{adhesion}',[AdhesionController::class, "index"])->name('colocation.show');
         Route::get('/create', [ColocationController::class, "create"])->name('colocation.create');
         Route::post('/store', [ColocationController::class, "store"]);
         Route::delete("/destroy/{colocation}", [ColocationController::class, "destroy"]);
@@ -68,11 +68,14 @@ Route::get('/register', function () {
         Route::get('/invite', function () {
             return view('colocation.invite');
         })->name('colocation.invite');
+
         Route::get('/invite/accept', function () {
             return view('colocation.invite-accept');
-        })->name('colocation.invite.accept');
-
+        })->name('colocation.invite');
+        
     });
+    Route::get('/invite/accept/{token}/{invitation}', [InvitationController::class, "accept"])->name('colocation.invite.accept');
+    Route::put('/invite/join', [InvitationController::class, "join"])->name('colocation.invite.accept');
 
     Route::prefix('admin')->group(function () {
 

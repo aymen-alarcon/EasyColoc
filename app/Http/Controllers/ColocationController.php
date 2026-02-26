@@ -15,14 +15,10 @@ class ColocationController extends Controller
      */
     public function index()
     {
-        $colocationQuery = colocation::query();
-        $colocation = $colocationQuery->where("owner_id", FacadesAuth::user()->id)->first();
-        if(isset($colocation)){
-            $adhesionQuery = adhesion::query();
-            $adhesion = $adhesionQuery->where("colocation_id", $colocation->id)->get();
-        }
+        $adhesionQuery = adhesion::query();
+        $adhesion = $adhesionQuery->where("user_id", FacadesAuth::user()->id)->first();
 
-        return view("colocation.index", compact("colocation"));
+        return view("colocation.index", compact("adhesion"));
     }
 
     public function create(){
