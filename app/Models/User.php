@@ -54,6 +54,10 @@ class User extends Authenticatable
         return $this->hasMany(credit::class, "user_id");
     }
 
+    public function invitation():HasMany{
+        return $this->hasMany(Invitation::class, "receiver_id");
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\adhesion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdhesionController extends Controller
 {
@@ -28,9 +29,17 @@ class AdhesionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $colocation)
     {
-        //
+        $validate = [
+            "user_id" => Auth::user()->id,
+            "colocation_id" => $colocation,
+            "left_at" => NULL
+        ];
+
+        Adhesion::create($validate);
+
+        return redirect()->route("dashboard");
     }
 
     /**

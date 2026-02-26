@@ -6,7 +6,7 @@
   </div>
   <div class="card shadow-sm">
     <div class="card-body">
-      <form class="row g-3" action="/colocation/create" method="POST">
+      <form class="row g-3" action="/colocation/store" method="POST">
         @csrf
         @method("POST")
         <div class="col-md-6">

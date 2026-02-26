@@ -17,10 +17,16 @@ class ColocationController extends Controller
     {
         $colocationQuery = colocation::query();
         $colocation = $colocationQuery->where("owner_id", FacadesAuth::user()->id)->first();
-        $adhesionQuery = adhesion::query();
-        $adhesion = $adhesionQuery->where("colocation_id", $colocation->id)->get();
+        if(isset($colocation)){
+            $adhesionQuery = adhesion::query();
+            $adhesion = $adhesionQuery->where("colocation_id", $colocation->id)->get();
+        }
 
         return view("colocation.index", compact("colocation"));
+    }
+
+    public function create(){
+        return view("colocation.create");
     }
 
     /**
@@ -36,9 +42,9 @@ class ColocationController extends Controller
         $validate["owner_id"] = Auth::user()->id;
         $validate["status"] = "pending";
 
-        Colocation::create($validate);
+        $colocation = Colocation::create($validate);
 
-        return redirect()->route("dashboard");
+        return redirect()->route("adhesion.store", $colocation->id);
     }
 
     /**
@@ -68,8 +74,10 @@ class ColocationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(colocation $colocation)
+    public function destroy(Colocation $Colocation)
     {
-        //
+        $Colocation->delete();
+
+        return redirect()->route("dashboard");
     }
 }

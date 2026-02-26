@@ -9,7 +9,11 @@
             <h2 class="h6">Statut de votre colocation</h2>
               <div class="alert alert-info">Vous avez une colocation active : <strong>{{ $colocation->name }}</strong>.</div>
               <a href="/colocation/show/{{ $colocation->id }}" class="btn btn-outline-primary"><i class="bi bi-eye me-1"></i>Accéder aux détails</a>
-              <button class="btn btn-outline-danger ms-2"><i class="bi bi-box-arrow-right me-1"></i>Quitter</button>
+              <form action="/colocation/destroy/{{ $colocation->id }}" method="post"> 
+                @csrf
+                @method("DELETE")             
+                <button type="submit" class="btn btn-outline-danger ms-2"><i class="bi bi-box-arrow-right me-1"></i>Quitter</button>
+              </form>
           </div>
         </div>
       </div>
@@ -28,5 +32,4 @@
     @endif
   </div>
 </main>
-
 @include("includes.footer")

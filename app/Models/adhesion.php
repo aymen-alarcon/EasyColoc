@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class adhesion extends Model
 {
-    protected $fillable = ["user_id", "colocation_id", "role", "left_at"];
+    protected $fillable = ["user_id", "colocation_id", "left_at"];
 
     public function colocation():BelongsTo{
         return $this->belongsTo(colocation::class);

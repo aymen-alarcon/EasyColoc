@@ -11,13 +11,16 @@
 <body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="/colocation">
+            <a class="navbar-brand d-flex align-items-center" href="/dashboard">
                 <i class="bi bi-house-heart me-2"></i> EasyColoc
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <ul class="navbar-nav ms-auto">
+                @auth
+                    <li><a class="dropdown-item text-danger" href="/Logout">Déconnexion</a></li>
+                @endauth
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                         <i class="bi bi-person-circle me-1"></i> Compte

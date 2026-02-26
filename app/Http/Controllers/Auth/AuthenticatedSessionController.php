@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('colocation.index');
+        return redirect()->route('colocation.show');
     }
 
     /**

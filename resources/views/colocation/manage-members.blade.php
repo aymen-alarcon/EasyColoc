@@ -21,14 +21,21 @@
                             @foreach ($members as $member)                                
                                 <tr>
                                     <td>{{ $member->user->first_name }} {{ $member->user->last_name }}</td>
-                                    <td><span class="badge bg-primary">{{ $member->role }}</span></td>
+                                    <td>
+                                        <span class="badge bg-primary">
+                                            @if ($member->colocation->owner_id === $member->user_id)
+                                                Owner
+                                            @else
+                                                Member
+                                            @endif
+                                        </span>
+                                    </td>
                                     <td>
                                         {{ $member->user->reputation }}
                                     </td>
 
                                     <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-secondary" disabled
-                                            title="Impossible de retirer l'owner">
+                                        <button class="btn btn-sm btn-outline-secondary" disabled>
                                             <i class="bi bi-lock"></i>
                                         </button>
                                     </td>

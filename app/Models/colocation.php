@@ -26,4 +26,8 @@ class colocation extends Model
     public function depense():HasMany{
         return $this->hasMany(depense::class, "colocation_id");
     }
+
+    public function invites():HasMany{
+        return $this->hasMany(Invitation::class, "colocation_id");
+    }
 }

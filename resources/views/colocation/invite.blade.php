@@ -6,17 +6,17 @@
   </div>
   <div class="card shadow-sm mb-4">
     <div class="card-body">
-      <form class="row g-3" action="" method="POST">
+      <form class="row g-3" action="/send-Invitation" method="POST">
         @csrf
         @method("POST")
 
         <div class="col-md-6">
           <label class="form-label required">Email du destinataire</label>
-          <input type="email" class="form-control" required placeholder="membre@mail.com">
+          <input type="email" name="email" class="form-control" required placeholder="membre@mail.com">
         </div>
         <div class="col-md-6">
-          <label class="form-label">Message (optionnel)</label>
-          <input class="form-control" placeholder="Un petit mot d'accompagnement">
+          <label class="form-label">Message</label>
+          <input class="form-control" name="message" placeholder="Un petit mot d'accompagnement">
         </div>
         <button type="submit" class="btn btn-primary"><i class="bi bi-send me-1"></i>Envoyer l'invitation</button>
       </form>
