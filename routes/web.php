@@ -57,7 +57,8 @@ Route::get('/register', function () {
         Route::get('/credit/{depense}', [CreditController::class, "index"])->name('colocation.credit');
 
         Route::get("/adhesion/store/{colocation}", [AdhesionController::class, "store"])->name("adhesion.store");
-
+        Route::delete("/adhesion/destroy/{adhesion}", [AdhesionController::class, "destroy"]);
+        
         Route::get('/manage-members/{colocation}', function ($colocation) {
             $query = adhesion::query();
             $members = $query->where('left_at', NULL)->where('colocation_id', $colocation)->get();
