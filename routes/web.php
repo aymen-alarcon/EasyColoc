@@ -10,6 +10,9 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Models\Adhesion;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InvitationController;
+use App\Models\Colocation;
+use App\Models\Depense;
+use App\Models\User;
 
 Route::get('/', function () {
     return view('welcome');
@@ -80,22 +83,8 @@ Route::get('/register', function () {
     Route::get('/invite/accept/{token}/{invitation}', [InvitationController::class, "accept"])->name('colocation.invite.accept');
     Route::put('/invite/join', [InvitationController::class, "join"])->name('colocation.invite.accept');
 
-    Route::prefix('admin')->group(function () {
-
-        Route::get('/dashboard', function () {
-            return view('admin.dashboard');
-        })->name('admin.dashboard');
-
-        Route::get('/users', function () {
-            return view('admin.users');
-        })->name('admin.users');
-
-        Route::get('/colocations', function () {
-            return view('admin.colocations');
-        })->name('admin.colocations');
-
-        Route::get('/expenses', function () {
-            return view('admin.expenses');
-        })->name('admin.expenses');
-    });
-
+    Route::get('/admin/dashboard', function () {
+        $users = User::all();
+        $colocations = Colocation::all();
+        return view('admin.dashboard', compact("users", "colocations"));
+    })->name('admin.dashboard');
