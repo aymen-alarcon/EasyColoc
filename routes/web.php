@@ -77,8 +77,10 @@ Route::get('/register', function () {
         })->name('colocation.invite');
         
     });
+    
     Route::get('/invite/accept/{token}/{invitation}', [InvitationController::class, "accept"])->name('colocation.invite.accept');
     Route::put('/invite/join', [InvitationController::class, "join"])->name('colocation.invite.accept');
+    Route::post('/invite/send', [InvitationController::class, "send"]);
 
     Route::prefix('admin')->group(function () {
 
@@ -98,5 +100,3 @@ Route::get('/register', function () {
             return view('admin.expenses');
         })->name('admin.expenses');
     });
-
-    Route::post('/send-Invitation', [InvitationController::class, "send"]);

@@ -21,7 +21,7 @@
               @foreach ($credits as $credit)                
                 <tr>
                   <td><i class="bi bi-person me-1"></i>{{ $credit->user->first_name }} {{ $credit->user->last_name }}</td>
-                  <td>{{ $credit->price }}</td>
+                  <td>{{ $credit->price }}</td> 
                   <td><span class="fw-semibold">{{ $credit->status }}</span></td>
                   <td><span class="text-muted">{{ $credit->created_at->format("Y-m-d") }}</span></td>
                   <td class="text-end">

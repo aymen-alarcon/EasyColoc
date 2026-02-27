@@ -35,9 +35,18 @@
                                     </td>
 
                                     <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-secondary" disabled>
-                                            <i class="bi bi-lock"></i>
-                                        </button>
+                                        @if ($member->user->id === Auth::user()->id)
+                                            <a class="btn btn-sm btn-outline-secondary" hidden>
+                                                <i class="bi bi-lock"></i>
+                                            </a>
+                                        @else
+                                        <form action="/colocation/adhesion/destroy/{{ $member->id }}" method="post">
+                                            @csrf
+                                            @method("DELETE")
+
+                                            <button type="submit" class="btn btn-sm btn-outline-secondary"><i class="bi bi-lock"></i></button>
+                                        </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

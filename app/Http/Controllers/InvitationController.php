@@ -40,7 +40,8 @@ class InvitationController extends Controller
         if ($token === $invitation->token && User::where("email", $invitation->email)->exists()) {
             $validate["status"] = "accepted";
             $invitation->update($validate);
-            return redirect()->route("home");    
+            $colocation = $invitation->colocation->id;
+            return redirect()->route('adhesion.store', $colocation);
         }else{
             return view("auth.register");
         }

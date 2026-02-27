@@ -6,6 +6,7 @@ use App\Models\Adhesion;
 use App\Models\colocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Credit;
 
 class AdhesionController extends Controller
 {
@@ -21,17 +22,9 @@ class AdhesionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $colocation)
+    public function store($colocation)
     {
         $validate = [
             "user_id" => Auth::user()->id,
@@ -40,8 +33,6 @@ class AdhesionController extends Controller
         ];
 
         Adhesion::create($validate);
-
-        $adhesion = Adhesion::all();
 
         return redirect()->route("dashboard");
     }
@@ -75,6 +66,12 @@ class AdhesionController extends Controller
      */
     public function destroy(Adhesion $adhesion)
     {
+        if(Credit::where("user_id", $adhesion->user->id)->where("status", "not paid")->exists()) {
+            Credit::where("user_id", $adhesion->user->id)
+                ->where("status", "not paid")
+                ->update(['user_id' => Auth::id()]);
+        }
+
         $adhesion->delete();
 
         return redirect()->route("dashboard");

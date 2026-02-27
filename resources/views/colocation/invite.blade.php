@@ -6,7 +6,7 @@
   </div>
   <div class="card shadow-sm mb-4">
     <div class="card-body">
-      <form class="row g-3" action="/invite/accept/{token}/{invitation}" method="POST">
+      <form class="row g-3" action="/invite/send" method="POST">
         @csrf
         @method("POST")
 
