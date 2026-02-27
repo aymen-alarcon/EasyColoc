@@ -25,23 +25,22 @@ class CreditController extends Controller
     public function store($depense)
     {
         $depenses = Depense::findOrFail($depense);
-
-        $members = count($depenses->colocation->adhesion);
+        $members = $depenses->colocation->users()->wherePivotNull('left_at');
         $price = $depenses->price;
-        foreach ($depenses->colocation->adhesion as $adhesion) {
-            $validate["price"] = $price / $members;
-            if ($adhesion->user->id === $depenses->user->id) {
+        foreach ($members->get() as $member) {
+            $validate["price"] = $price / $members->count();
+            if ($member->id === $depenses->user->id) {
                 $validate["status"] = "paid";
             }else{
                 $validate["status"] = "not paid";
             }
-            $validate["user_id"] = $adhesion->user->id;
+            $validate["user_id"] = $member->id;
             $validate["depense_id"] = $depenses->id;
 
             credit::create($validate);
         }
 
-        return redirect()->route("colocation.expenses", $adhesion->colocation->id);
+        return redirect()->route("colocation.expenses", $depenses->colocation->id);
     }
 
     /**

@@ -10,7 +10,7 @@
       <form class="row g-3" action="/colocation/expense/create/store" method="POST">
         @csrf
         @method("POST")
-        <input value="{{ Auth::user()->ownColocation->id }}" class="form-control" name="colocation" hidden>
+        <input value="{{ Auth::user()->colocations->first()->id }}" class="form-control" name="colocation" hidden>
         <div class="col-md-6">
           <label class="form-label required">Payeur</label>
           <select class="form-select" name="payer" required>
@@ -32,7 +32,7 @@
           <input class="form-control" name="title" required placeholder="Ex : Internet">
         </div>
         <div class="col-md-6">
-          <label class="form-label required">Montant (DH)</label>
+          <label class="form-label required">Montant</label>
           <input type="number" name="price" class="form-control" required min="0" step="0.01" placeholder="0.00">
         </div>
         <div class="col-12">

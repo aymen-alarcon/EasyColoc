@@ -28,14 +28,7 @@ class DepenseController extends Controller
     public function create()
     {
         $query = Adhesion::query();
-
-        dd(Auth::user()->adhesion->id);
-
-        if (Auth::user()->colocation->owner_id === Auth::user()->id) {
-            $adhesions = $query->where("colocation_id", Auth::user()->ownColocation->id)->get();
-        }else{
-            $adhesions = $query->where("colocation_id", Auth::user()->Colocation->id)->get();
-        }
+        $adhesions = $query->where("colocation_id", Auth::user()->colocations->first()->id)->get();
         $categories = Category::all();
         return view("colocation.expense-create", compact("adhesions", "categories"));
     }

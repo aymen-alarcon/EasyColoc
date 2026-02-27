@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Adhesion;
 use App\Models\colocation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\Auth;
 
 class ColocationController extends Controller
@@ -16,7 +15,7 @@ class ColocationController extends Controller
     public function index()
     {
         $adhesionQuery = Adhesion::query();
-        $adhesion = $adhesionQuery->where("user_id", FacadesAuth::user()->id)->first();
+        $adhesion = $adhesionQuery->where("user_id", Auth::user()->id)->first();
 
         return view("colocation.index", compact("adhesion"));
     }

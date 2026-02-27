@@ -5,17 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Colocation extends Model
 {
     protected $fillable = ["name", "description", "status", "owner_id"];
 
-    public function users():HasMany{
-        return $this->HasMany(User::class);
-    }
-
-    public function adhesion():HasMany{
-        return $this->hasMany(Adhesion::class, "colocation_id");
+    public function users():BelongsToMany
+    {
+        return $this->belongsToMany(
+            User::class,
+            'adhesions',
+            'colocation_id',
+            'user_id'
+        )->withPivot('left_at')
+        ->withTimestamps();
     }
 
     public function owner(): BelongsTo

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Cashier\Billable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -30,18 +31,21 @@ class User extends Authenticatable
         'reputation',
     ];
 
-    public function colocation():BelongsTo{
-        return $this->BelongsTo(Colocation::class);
-    }
-
     public function ownColocation():HasOne{
         return $this->hasOne(Colocation::class, "owner_id");
     }
 
-    public function adhesion():BelongsTo{
-        return $this->BelongsTo(Adhesion::class, "user_id");
+    public function colocations():BelongsToMany
+    {
+        return $this->belongsToMany(
+            Colocation::class,
+            'adhesions',
+            'user_id',
+            'colocation_id'
+        )->withPivot('left_at')
+        ->withTimestamps();
     }
-
+    
     public function payed():HasMany{
         return $this->hasMany(Depense::class, "buyer");
     }
