@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\adhesion;
+use App\Models\Adhesion;
 use App\Models\colocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
@@ -15,7 +15,7 @@ class ColocationController extends Controller
      */
     public function index()
     {
-        $adhesionQuery = adhesion::query();
+        $adhesionQuery = Adhesion::query();
         $adhesion = $adhesionQuery->where("user_id", FacadesAuth::user()->id)->first();
 
         return view("colocation.index", compact("adhesion"));
@@ -46,7 +46,7 @@ class ColocationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(colocation $colocation)
+    public function show(Colocation $colocation)
     {
         //
     }
@@ -54,7 +54,7 @@ class ColocationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(colocation $colocation)
+    public function edit(Colocation $colocation)
     {
         //
     }
@@ -62,7 +62,7 @@ class ColocationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, colocation $colocation)
+    public function update(Request $request, Colocation $colocation)
     {
         //
     }

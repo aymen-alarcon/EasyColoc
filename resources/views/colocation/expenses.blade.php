@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="mb-0">Dépenses</h1>
         <a href="/colocation/expense/create"><i class="bi bi-plus-circle me-1"></i> Nouvelle dépense</a>
-        <a class="btn btn-outline-secondary" href="/colocation/show/{{ Auth::user()->ownColocation->id }}"><i class="bi bi-arrow-left me-1"></i>Retour</a>
+        <a class="btn btn-outline-secondary" href="{{ url()->previous() }}"><i class="bi bi-arrow-left me-1"></i>Retour</a>
     </div>
     <div class="card shadow-sm">
         <div class="card-body p-0">

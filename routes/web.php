@@ -7,7 +7,7 @@ use App\Http\Controllers\CreditController;
 use App\Http\Controllers\DepenseController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Models\adhesion;
+use App\Models\Adhesion;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InvitationController;
 
@@ -60,7 +60,7 @@ Route::get('/register', function () {
         Route::delete("/adhesion/destroy/{adhesion}", [AdhesionController::class, "destroy"]);
         
         Route::get('/manage-members/{colocation}', function ($colocation) {
-            $query = adhesion::query();
+            $query = Adhesion::query();
             $members = $query->where('left_at', NULL)->where('colocation_id', $colocation)->get();
             return view('colocation.manage-members', compact("members"));
         })->name('colocation.manage-members');

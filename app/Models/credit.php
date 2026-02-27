@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class credit extends Model
+class Credit extends Model
 {
     protected $fillable = ["status", "depense_id", "user_id", "price"];
 
@@ -14,6 +14,6 @@ class credit extends Model
     }
 
     public function depense():BelongsTo{
-        return $this->BelongsTo(depense::class);
+        return $this->BelongsTo(Depense::class);
     }
 }

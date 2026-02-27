@@ -31,19 +31,19 @@ class User extends Authenticatable
     ];
 
     public function colocation():BelongsTo{
-        return $this->BelongsTo(colocation::class);
+        return $this->BelongsTo(Colocation::class);
     }
 
     public function ownColocation():HasOne{
-        return $this->hasOne(colocation::class, "owner_id");
+        return $this->hasOne(Colocation::class, "owner_id");
     }
 
-    public function adhesions():HasMany{
-        return $this->HasMany(adhesion::class, "user_id");
+    public function adhesion():BelongsTo{
+        return $this->BelongsTo(Adhesion::class, "user_id");
     }
 
     public function payed():HasMany{
-        return $this->hasMany(depense::class, "buyer");
+        return $this->hasMany(Depense::class, "buyer");
     }
 
     public function role():BelongsTo{
@@ -51,7 +51,7 @@ class User extends Authenticatable
     }
 
     public function credit():HasMany{
-        return $this->hasMany(credit::class, "user_id");
+        return $this->hasMany(Credit::class, "user_id");
     }
 
     public function invitation():HasMany{

@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class adhesion extends Model
+class Adhesion extends Model
 {
     protected $fillable = ["user_id", "colocation_id", "left_at"];
 
@@ -13,8 +14,8 @@ class adhesion extends Model
         return $this->belongsTo(colocation::class, "colocation_id");
     }
 
-    public function user(): BelongsTo
+    public function user():HasMany
     {
-        return $this->belongsTo(User::class, "user_id");
+        return $this->HasMany(User::class, "user_id");
     }
 }

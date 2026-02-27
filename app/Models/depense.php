@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class depense extends Model
+class Depense extends Model
 {
     protected $fillable = ["title", "price", "category_id", "buyer", "colocation_id"];
 
     public function category():BelongsTo{
-        return $this->BelongsTo(category::class);
+        return $this->BelongsTo(Category::class);
     }
 
     public function user():BelongsTo{

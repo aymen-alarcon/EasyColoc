@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\adhesion;
+use App\Models\Adhesion;
 use App\Models\colocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +15,7 @@ class AdhesionController extends Controller
     public function index($colocation)
     {
         $colocationObject = colocation::findOrFail($colocation);
-        $query = adhesion::query();
+        $query = Adhesion::query();
         $members = $query->where('left_at', NULL)->where('colocation_id', $colocation)->get();
         return view('colocation.list', compact("members", "colocationObject"));
     }
@@ -49,7 +49,7 @@ class AdhesionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(adhesion $adhesion)
+    public function show(Adhesion $adhesion)
     {
         //
     }
@@ -57,7 +57,7 @@ class AdhesionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(adhesion $adhesion)
+    public function edit(Adhesion $adhesion)
     {
         //
     }
@@ -65,7 +65,7 @@ class AdhesionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, adhesion $adhesion)
+    public function update(Request $request, Adhesion $adhesion)
     {
         //
     }
@@ -73,7 +73,7 @@ class AdhesionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(adhesion $adhesion)
+    public function destroy(Adhesion $adhesion)
     {
         $adhesion->delete();
 

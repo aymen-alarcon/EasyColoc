@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\adhesion;
-use App\Models\depense;
+use App\Models\Adhesion;
+use App\Models\Depense;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\category;
+use App\Models\Category;
+use App\Models\Colocation;
 
 class DepenseController extends Controller
 {
@@ -17,7 +18,8 @@ class DepenseController extends Controller
     {
         $query = Depense::query();
         $depenses = $query->where("colocation_id", $colocation)->get();
-        return view("colocation.expenses", compact("depenses"));
+        $colocationObject = Colocation::findOrFail($colocation);
+        return view("colocation.expenses", compact("depenses", "colocationObject"));
     }
 
     /**
@@ -25,8 +27,15 @@ class DepenseController extends Controller
      */
     public function create()
     {
-        $query = adhesion::query();
-        $adhesions = $query->where("colocation_id", Auth::user()->ownColocation->id)->get();
+        $query = Adhesion::query();
+
+        dd(Auth::user()->adhesion->id);
+
+        if (Auth::user()->colocation->owner_id === Auth::user()->id) {
+            $adhesions = $query->where("colocation_id", Auth::user()->ownColocation->id)->get();
+        }else{
+            $adhesions = $query->where("colocation_id", Auth::user()->Colocation->id)->get();
+        }
         $categories = Category::all();
         return view("colocation.expense-create", compact("adhesions", "categories"));
     }
@@ -52,7 +61,7 @@ class DepenseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(depense $depense)
+    public function show(Depense $depense)
     {
         //
     }
@@ -60,7 +69,7 @@ class DepenseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(depense $depense)
+    public function edit(Depense $depense)
     {
         //
     }
@@ -68,7 +77,7 @@ class DepenseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, depense $depense)
+    public function update(Request $request, Depense $depense)
     {
         //
     }
@@ -76,7 +85,7 @@ class DepenseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(depense $depense)
+    public function destroy(Depense $depense)
     {
         //
     }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class colocation extends Model
+class Colocation extends Model
 {
     protected $fillable = ["name", "description", "status", "owner_id"];
 
@@ -15,7 +15,7 @@ class colocation extends Model
     }
 
     public function adhesion():HasMany{
-        return $this->hasMany(adhesion::class, "colocation_id");
+        return $this->hasMany(Adhesion::class, "colocation_id");
     }
 
     public function owner(): BelongsTo
@@ -24,7 +24,7 @@ class colocation extends Model
     }
 
     public function depense():HasMany{
-        return $this->hasMany(depense::class, "colocation_id");
+        return $this->hasMany(Depense::class, "colocation_id");
     }
 
     public function invites():HasMany{

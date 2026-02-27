@@ -8,7 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use App\Models\adhesion;
+use App\Models\Adhesion;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -29,16 +29,16 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        $adhesionQuery = adhesion::query();
-        $adhesion = $adhesionQuery->where("user_id", Auth::user()->id)->get();
+        // $adhesionQuery = Adhesion::query();
+        // $adhesion = $adhesionQuery->where("user_id", Auth::user()->id)->get();
 
-        return redirect()->route('colocation.show', $adhesion);
+        return redirect()->route('dashboard');
     }
 
     /**
      * Destroy an authenticated session.
      */
-    public function destroy(Request $request): RedirectResponse
+    public function destroy(Request $request)
     {
         Auth::guard('web')->logout();
 

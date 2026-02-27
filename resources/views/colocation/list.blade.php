@@ -31,17 +31,19 @@
       </div>
     </div>
     <div class="col-lg-4">
-      <a class="btn btn-outline-secondary" href="{{ url()->previous() }}"><i class="bi bi-arrow-left me-1"></i>Retour</a>
-      @if ($colocationObject->owner_id === Auth::user()->id)
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <div class="d-flex gap-2">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="d-flex gap-2">
+            <a class="btn btn-outline-secondary" href="{{ url()->previous() }}"><i class="bi bi-arrow-left me-1"></i>Retour</a>
+            @if ($colocationObject->owner_id === Auth::user()->id)
               <a class="btn btn-outline-primary w-100 mb-2" href="/colocation/manage-members/{{ $member->colocation->id }}"><i class="bi bi-person-circle"></i> Manager les membres</a>
               <a class="btn btn-outline-primary w-100 mb-2" href="/colocation/expenses/{{ $member->colocation->id }}"><i class="bi bi-receipt me-1"></i>Gérer les dépenses</a>
-            </div>  
-          </div>
+            @else
+              <a class="btn btn-outline-primary w-100 mb-2" href="/colocation/expenses/{{ $member->colocation->id }}"><i class="bi bi-receipt me-1"></i>Gérer mes dépenses</a>
+            @endif
+          </div>  
         </div>
-      @endif
+      </div>
     </div>
   </div>
 </main>

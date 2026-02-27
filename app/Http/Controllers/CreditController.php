@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\credit;
 use Illuminate\Http\Request;
-use App\Models\depense;
-use App\Models\colocation;
+use App\Models\Depense;
 
 class CreditController extends Controller
 {
@@ -48,7 +47,7 @@ class CreditController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(credit $credit)
+    public function show(Credit $credit)
     {
         //
     }
@@ -56,7 +55,7 @@ class CreditController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(credit $credit)
+    public function edit(Credit $credit)
     {
         //
     }
@@ -64,7 +63,7 @@ class CreditController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, credit $credit)
+    public function update(Request $request, Credit $credit)
     {
         //
     }
@@ -72,7 +71,7 @@ class CreditController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(credit $credit)
+    public function destroy(Credit $credit)
     {
         //
     }
