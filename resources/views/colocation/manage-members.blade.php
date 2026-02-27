@@ -42,7 +42,7 @@
                                         @else
                                         <form action="/colocation/adhesion/destroy/{{ $member->id }}" method="post">
                                             @csrf
-                                            @method("DELETE")
+                                            @method("put")
 
                                             <button type="submit" class="btn btn-sm btn-outline-secondary"><i class="bi bi-lock"></i></button>
                                         </form>

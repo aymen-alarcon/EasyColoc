@@ -29,10 +29,11 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // $adhesionQuery = Adhesion::query();
-        // $adhesion = $adhesionQuery->where("user_id", Auth::user()->id)->get();
-
-        return redirect()->route('dashboard');
+        if (Auth::user()->role_id === 2) {
+            return redirect()->route("admin.dashboard");
+        }else{
+            return redirect()->route("dashboard");
+        }
     }
 
     /**

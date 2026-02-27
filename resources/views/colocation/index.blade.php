@@ -10,7 +10,7 @@
               <div class="alert alert-info">Vous avez une colocation active : <strong>{{ $adhesion->colocation->name }}</strong>.</div>
               <div class="d-flex justify-content-between align-items-center">
                 <a href="/colocation/show/{{ $adhesion->colocation->id }}" class="btn btn-outline-primary"><i class="bi bi-eye me-1"></i>Accéder aux détails</a>
-                <form action="/colocation/adhesion/destroy/{{ $adhesion->id }}" method="post"> 
+                <form action="/colocation/adhesion/put/{{ $adhesion->id }}" method="post"> 
                   @csrf
                   @method("DELETE")             
                   <button type="submit" class="btn btn-outline-danger ms-2"><i class="bi bi-box-arrow-right me-1"></i>Quitter</button>

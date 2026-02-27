@@ -59,7 +59,7 @@ Route::get('/register', function () {
         Route::get("/credit/paid/{credit}", [CreditController::class, "update"]);
 
         Route::get("/adhesion/store/{colocation}", [AdhesionController::class, "store"])->name("adhesion.store");
-        Route::delete("/adhesion/destroy/{adhesion}", [AdhesionController::class, "destroy"]);
+        Route::put("/adhesion/destroy/{adhesion}", [AdhesionController::class, "update"]);
         
         Route::get('/manage-members/{colocation}', function ($colocation) {
             $query = Adhesion::query();
@@ -77,10 +77,8 @@ Route::get('/register', function () {
         })->name('colocation.invite');
         
     });
-    
     Route::get('/invite/accept/{token}/{invitation}', [InvitationController::class, "accept"])->name('colocation.invite.accept');
     Route::put('/invite/join', [InvitationController::class, "join"])->name('colocation.invite.accept');
-    Route::post('/invite/send', [InvitationController::class, "send"]);
 
     Route::prefix('admin')->group(function () {
 
@@ -100,3 +98,4 @@ Route::get('/register', function () {
             return view('admin.expenses');
         })->name('admin.expenses');
     });
+

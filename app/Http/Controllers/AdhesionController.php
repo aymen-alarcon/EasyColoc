@@ -38,33 +38,9 @@ class AdhesionController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Adhesion $adhesion)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Adhesion $adhesion)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Adhesion $adhesion)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Adhesion $adhesion)
+    public function update(Adhesion $adhesion)
     {
         if(Credit::where("user_id", $adhesion->user->id)->where("status", "not paid")->exists()) {
             Credit::where("user_id", $adhesion->user->id)
@@ -72,7 +48,7 @@ class AdhesionController extends Controller
                 ->update(['user_id' => Auth::id()]);
         }
 
-        $adhesion->delete();
+        $adhesion->update(["left_at" => now()] );
 
         return redirect()->route("dashboard");
     }
