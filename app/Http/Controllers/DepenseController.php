@@ -80,6 +80,9 @@ class DepenseController extends Controller
      */
     public function destroy(Depense $depense)
     {
-        //
+        $colocation = $depense->colocation->id;
+        $depense->delete();
+
+        return redirect()->route("colocation.expenses", $colocation);
     }
 }

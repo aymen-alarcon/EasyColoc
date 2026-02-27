@@ -52,9 +52,11 @@ Route::get('/register', function () {
         Route::get('/expenses/{colocation}', [DepenseController::class, "index"])->name('colocation.expenses');
         Route::get('/expense/create', [DepenseController::class, "create"])->name('colocation.expense-create');
         Route::post('/expense/create/store', [DepenseController::class, "store"]);
+        Route::delete("/expense/destroy/{depense}", [DepenseController::class, "destroy"]);
 
         Route::get("/credit/store/{depense}", [CreditController::class, "store"])->name("credit.store");
         Route::get('/credit/{depense}', [CreditController::class, "index"])->name('colocation.credit');
+        Route::get("/credit/paid/{credit}", [CreditController::class, "update"]);
 
         Route::get("/adhesion/store/{colocation}", [AdhesionController::class, "store"])->name("adhesion.store");
         Route::delete("/adhesion/destroy/{adhesion}", [AdhesionController::class, "destroy"]);

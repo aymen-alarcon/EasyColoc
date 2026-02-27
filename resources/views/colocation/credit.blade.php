@@ -26,6 +26,11 @@
                   <td><span class="text-muted">{{ $credit->created_at->format("Y-m-d") }}</span></td>
                   <td class="text-end">
                     <div class="btn-group">
+                      @if ($credit->status === "not paid" && $credit->user->id === Auth::user()->id)
+                        <a href="/colocation/credit/paid/{{ $credit->id }}" class="btn btn-sm btn-outline-success btn-history" data-id="2">
+                          <i class="bi bi-bank"></i> Payer
+                        </a>
+                      @endif
                       <button class="btn btn-sm btn-outline-secondary btn-history" data-id="2">
                         <i class="bi bi-clock-history me-1"></i> Historique
                       </button>
