@@ -7,6 +7,7 @@ use App\Models\colocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Credit;
+use App\Models\User;
 
 class AdhesionController extends Controller
 {
@@ -45,7 +46,12 @@ class AdhesionController extends Controller
         if(Credit::where("user_id", $adhesion->user->id)->where("status", "not paid")->exists()) {
             Credit::where("user_id", $adhesion->user->id)
                 ->where("status", "not paid")
-                ->update(['user_id' => Auth::id()]);
+                ->update(['user_id' => Auth::user()->id]);
+            User::where("id", Auth::user()->id)
+                ->update(["reputation" => Auth::user()->reputation - 1]);
+        }elseif (Credit::where("user_id", $adhesion->user->id)->where("status", "not paid")->doesntExist()) {
+            User::where("id", Auth::user()->id)
+                ->update(["reputation" => Auth::user()->reputation + 1]);
         }
 
         $adhesion->update(["left_at" => now()] );
