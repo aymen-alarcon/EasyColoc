@@ -60,6 +60,8 @@ class UserController extends Controller
      */
     public function destroy(User $User)
     {
-        //
+        $User->delete();
+
+        return redirect()->route("admin.dashboard");
     }
 }

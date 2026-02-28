@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Models\Adhesion;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InvitationController;
+use App\Http\Controllers\UserController;
 use App\Models\Colocation;
 use App\Models\Depense;
 use App\Models\User;
@@ -84,7 +85,10 @@ Route::get('/register', function () {
     Route::put('/invite/join', [InvitationController::class, "join"])->name('colocation.invite.accept');
 
     Route::get('/admin/dashboard', function () {
-        $users = User::all();
+        $users = User::where("role_id", 1)->get();
         $colocations = Colocation::all();
         return view('admin.dashboard', compact("users", "colocations"));
     })->name('admin.dashboard');
+    
+    Route::delete("/admin/colocation/destroy/{colocation}", [ColocationController::class, "destroy"]);
+    Route::delete("/admin/user/destroy/{user}", [UserController::class, "destroy"]);    

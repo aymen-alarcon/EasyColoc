@@ -49,6 +49,6 @@ class ColocationController extends Controller
     {
         $Colocation->delete();
 
-        return redirect()->route("dashboard");
+        return back();
     }
 }
