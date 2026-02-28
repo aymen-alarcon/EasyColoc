@@ -2,7 +2,7 @@
   <div class="container py-4">
     <h1 class="mb-5">Catégories</h1>
     <div class="row g-4">
-      <div class="col-lg-5">
+      <div class="col-lg-12">
         <div class="card shadow-sm">
           <div class="card-body">
             <h2 class="h6 mb-3">Ajouter une catégorie</h2>
@@ -37,13 +37,16 @@
                       <td>
                         <span class="cat-name">{{ $category->description }}</span>
                       </td>
-                      <td class="text-end">
-                        <button class="btn btn-sm btn-outline-secondary me-1 btn-rename" data-name="Alimentation">
+                      <td class="text-end d-flex">
+                        <button class="btn btn-sm btn-outline-secondary me-1 btn-rename">
                           <i class="bi bi-pencil"></i>
                         </button>
-                        <button class="btn btn-sm btn-outline-danger btn-delete" data-name="Alimentation" data-usage="12">
-                          <i class="bi bi-trash"></i>
-                        </button>
+                        <form action="/colocation/categories/destroy/{{ $category->id }}" method="post">
+                          @csrf
+                          @method("DELETE")
+
+                          <button type="submit" class="btn btn-sm btn-outline-danger btn-delete"><i class="bi bi-trash"></i></button>
+                        </form>
                       </td>
                     </tr>
                   @endforeach

@@ -32,7 +32,7 @@
                                         <td>{{ $colocation->status }}</td>
                                         <td>{{ $colocation->owner->first_name }} {{ $colocation->owner->last_name }}</td>
                                         <td>{{ $colocation->created_at->format("Y-m-d") }}</td>
-                                        <td>
+                                        <td class="d-flex">
                                             <button class="btn btn-sm btn-outline-secondary me-1 btn-rename"><i class="bi bi-pencil"></i></button>
                                             <form action="/admin/colocation/destroy/{{ $colocation->id }}" method="post">
                                                 @csrf
@@ -75,7 +75,7 @@
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->reputation }}</td>
                                         <td>{{ $user->created_at->format("Y-m-d") }}</td>
-                                        <td>
+                                        <td class="d-flex">
                                             <button class="btn btn-sm btn-outline-secondary me-1 btn-rename"><i class="bi bi-pencil"></i></button>
                                             <form action="/admin/user/destroy/{{ $user->id }}" method="post">
                                                 @csrf

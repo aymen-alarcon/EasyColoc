@@ -52,18 +52,19 @@ Route::get('/register', function () {
 
         Route::get('/categories', [CategoryController::class, "index"])->name('colocation.categories');
         Route::post('/categories/store', [CategoryController::class, "store"]);
+        Route::delete('/categories/destroy/{category}', [CategoryController::class, "destroy"]);
 
         Route::get('/expenses/{colocation}', [DepenseController::class, "index"])->name('colocation.expenses');
         Route::get('/expense/create', [DepenseController::class, "create"])->name('colocation.expense-create');
         Route::post('/expense/create/store', [DepenseController::class, "store"]);
-        Route::delete("/expense/destroy/{depense}", [DepenseController::class, "destroy"]);
+        Route::put("/expense/update/{depense}", [DepenseController::class, "update"]);
 
         Route::get("/credit/store/{depense}", [CreditController::class, "store"])->name("credit.store");
         Route::get('/credit/{depense}', [CreditController::class, "index"])->name('colocation.credit');
         Route::get("/credit/paid/{credit}", [CreditController::class, "update"]);
 
         Route::get("/adhesion/store/{colocation}", [AdhesionController::class, "store"])->name("adhesion.store");
-        Route::put("/adhesion/destroy/{adhesion}", [AdhesionController::class, "update"]);
+        Route::put("/adhesion/update/{adhesion}", [AdhesionController::class, "update"]);
         
         Route::get('/manage-members/{colocation}', function ($colocation) {
             $query = Adhesion::query();
@@ -88,7 +89,7 @@ Route::get('/register', function () {
         $users = User::where("role_id", 1)->get();
         $colocations = Colocation::all();
         return view('admin.dashboard', compact("users", "colocations"));
-    })->name('admin.dashboard');
+    })->name('admin.dashboard')->middleware("role");
     
     Route::delete("/admin/colocation/destroy/{colocation}", [ColocationController::class, "destroy"]);
     Route::delete("/admin/user/destroy/{user}", [UserController::class, "destroy"]);    

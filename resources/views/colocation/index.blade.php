@@ -1,18 +1,30 @@
 @include("includes.header")
 <main class="container py-4">
   <h1 class="mb-3">Ma colocation</h1>
-  @if (isset($adhesion))
+  @if (isset($adhesion) && $adhesion->left_at === NULL)
     <div class="row g-3">
       <div class="col-lg-8">
         <div class="card shadow-sm">
           <div class="card-body">
             <h2 class="h6">Statut de votre colocation</h2>
               <div class="alert alert-info">Vous avez une colocation active : <strong>{{ $adhesion->colocation->name }}</strong>.</div>
+              @if (isset(Auth::user()->ownColocation))
+                <div class="d-flex justify-content-between align-items-center">
+                  <a href="/colocation/show/{{ $adhesion->colocation->id }}" class="btn btn-outline-primary"><i class="bi bi-eye me-1"></i>Accéder aux détails</a>
+                  <form action="/colocation/delete/{{ $adhesion->colocation->id }}" method="post"> 
+                    @csrf
+                    @method("DELETE") 
+
+                    <button type="submit" class="btn btn-outline-danger ms-2"><i class="bi bi-box-arrow-right me-1"></i>Quitter</button>
+                  </form>
+                </div>
+              @endif
               <div class="d-flex justify-content-between align-items-center">
                 <a href="/colocation/show/{{ $adhesion->colocation->id }}" class="btn btn-outline-primary"><i class="bi bi-eye me-1"></i>Accéder aux détails</a>
-                <form action="/colocation/adhesion/put/{{ $adhesion->id }}" method="post"> 
+                <form action="/colocation/adhesion/update/{{ $adhesion->id }}" method="post"> 
                   @csrf
-                  @method("DELETE")             
+                  @method("PUT") 
+
                   <button type="submit" class="btn btn-outline-danger ms-2"><i class="bi bi-box-arrow-right me-1"></i>Quitter</button>
                 </form>
               </div>
