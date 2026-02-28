@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\UserController;
 use App\Models\Colocation;
-use App\Models\Depense;
 use App\Models\User;
+use App\Http\Controllers\StripeController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -92,4 +92,8 @@ Route::get('/register', function () {
     })->name('admin.dashboard')->middleware("role");
     
     Route::delete("/admin/colocation/destroy/{colocation}", [ColocationController::class, "destroy"]);
-    Route::delete("/admin/user/destroy/{user}", [UserController::class, "destroy"]);    
+    Route::delete("/admin/user/destroy/{user}", [UserController::class, "destroy"]);  
+    
+    Route::get('/stripe', [StripeController::class, 'index'])->name( 'stripe.index');
+    Route::post('/checkout/{reservation}', [StripeController::class, 'checkout'])->name("stripe.checkout");
+    Route::get('/success/{reservation}', [StripeController::class, 'success'])->name('stripe.success');

@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
 
 class StripeController extends Controller
 {
-    // public function index(Reservation $reservation)
-    // {
-    //     return view('stripe.index', compact($reservation));
-    // }
+    public function index()
+    {
+        return view('stripe.index');
+    }
 
     public function checkout()
     {        
