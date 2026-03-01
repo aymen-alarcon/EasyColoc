@@ -8,7 +8,6 @@ use App\Mail\ContactMail;
 use App\Models\Invitation;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Str;
 
 class InvitationController extends Controller

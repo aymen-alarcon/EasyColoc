@@ -97,3 +97,4 @@ Route::get('/register', function () {
     Route::get('/stripe', [StripeController::class, 'index'])->name( 'stripe.index');
     Route::post('/checkout/{reservation}', [StripeController::class, 'checkout'])->name("stripe.checkout");
     Route::get('/success/{reservation}', [StripeController::class, 'success'])->name('stripe.success');
+    Route::post('/invite/send', [InvitationController::class, "send"]);

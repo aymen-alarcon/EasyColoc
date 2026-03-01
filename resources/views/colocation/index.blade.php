@@ -18,16 +18,17 @@
                     <button type="submit" class="btn btn-outline-danger ms-2"><i class="bi bi-box-arrow-right me-1"></i>Quitter</button>
                   </form>
                 </div>
+              @else
+                <div class="d-flex justify-content-between align-items-center">
+                  <a href="/colocation/show/{{ $adhesion->colocation->id }}" class="btn btn-outline-primary"><i class="bi bi-eye me-1"></i>Accéder aux détails</a>
+                  <form action="/colocation/adhesion/update/{{ $adhesion->id }}" method="post"> 
+                    @csrf
+                    @method("PUT") 
+  
+                    <button type="submit" class="btn btn-outline-danger ms-2"><i class="bi bi-box-arrow-right me-1"></i>Quitter</button>
+                  </form>
+                </div>
               @endif
-              <div class="d-flex justify-content-between align-items-center">
-                <a href="/colocation/show/{{ $adhesion->colocation->id }}" class="btn btn-outline-primary"><i class="bi bi-eye me-1"></i>Accéder aux détails</a>
-                <form action="/colocation/adhesion/update/{{ $adhesion->id }}" method="post"> 
-                  @csrf
-                  @method("PUT") 
-
-                  <button type="submit" class="btn btn-outline-danger ms-2"><i class="bi bi-box-arrow-right me-1"></i>Quitter</button>
-                </form>
-              </div>
           </div>
         </div>
       </div>

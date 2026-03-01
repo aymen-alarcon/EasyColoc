@@ -1,5 +1,4 @@
 @include("includes.header")
-
 <div class="form-container">
     <h1>Payment Successful!</h1>
     <form action="/Payments/Store/{{ $depense->id }}" method="POST" id="RegisterForm">

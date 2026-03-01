@@ -19,18 +19,8 @@
             </button>
             <ul class="navbar-nav ms-auto">
                 @auth
-                    <li><a class="dropdown-item text-danger" href="/Logout">Déconnexion</a></li>
+                    <li><a class="dropdown-item text-white" href="/Logout">Déconnexion</a></li>
                 @endauth
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                        <i class="bi bi-person-circle me-1"></i> Compte
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="/profile">Profil</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-danger" href="/Logout">Déconnexion</a></li>
-                    </ul>
-                </li>
             </ul>
         </div>
     </nav>
